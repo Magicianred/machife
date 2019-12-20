@@ -326,14 +326,21 @@ export default {
       this.drawer_open = !this.drawer_open;
     },
     logout(){
-      this.$store.dispatch('notifier/unset_token').then(()=>{
-        this.$store.dispatch('get_logout_url').then(url=>{
-            this.$store.commit('login', false)
-            this.$router.replace({name:'access'}).then(()=>{
-              window.location.href=url
-            })
-        })
-      })
+			this.$store.commit('login', false)
+			this.$store.dispatch('start_loading')
+			this.$store.dispatch('notifier/unset_token').then(()=>{
+				this.$store.dispatch('get_logout_url').then(url=>{
+					this.$router.replace({name:'access'}).then(()=>{
+						let interval = setInterval(()=>{
+							if(this.$store.state.generic.login===false){
+								clearInterval(interval)
+								this.$store.dispatch('end_loading')
+								window.location.href=url
+							}
+						}, 500)
+					})
+				})
+			})
     }
   },
   created() {
