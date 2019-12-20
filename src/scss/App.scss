@@ -1,0 +1,122 @@
+@import './media.scss';
+
+.datablock {
+  padding: 3px;
+}
+.social-button {
+  margin: 0 20px;
+}
+
+.footer-link {
+  margin: 0 10px;
+}
+
+.blue-icon {
+  color: #1E59C1!important;
+}
+
+.active-link {
+  color: #1E59C1!important
+}
+
+@mixin padded($y, $x) {
+  @media (min-width: "600px") {
+    .padded-#{$y}-#{$x} {
+      padding: #{$y}px #{$x}px;
+    }
+  }
+}
+
+@mixin padded_with_breakpoints($y, $x) {
+
+  @include xs {
+    .padded-wb-#{$y}-#{$x} {
+      padding: calc(#{$y}px * 0) calc(#{$x}px * 0);
+    }
+  }
+
+  @include sm {
+    .padded-wb-#{$y}-#{$x} {
+      padding: calc(#{$y}px * 0.3) calc(#{$x}px * 0.3);
+    }
+  }
+
+  @include md {
+    .padded-wb-#{$y}-#{$x} {
+      padding: calc(#{$y}px * 0.5) calc(#{$x}px * 0.5);
+    }
+  }
+
+  @include lg {
+    .padded-wb-#{$y}-#{$x} {
+      padding: calc(#{$y}px * 0.7) calc(#{$x}px * 0.7);
+    }
+  }
+  @include xl {
+    .padded-wb-#{$y}-#{$x} {
+      padding: #{$y}px #{$x}px;
+    }
+  }
+}
+
+@mixin min_height_100vh_minus($x) {
+  @media (min-width: "960px") {
+    .hmin100vh-#{$x} {
+      min-height: calc(100vh - #{$x}px);
+      
+    }
+  }
+  @media (max-width: "960px") {
+    .hmin100vh-#{$x} {
+      min-height: calc(100vh - #{$x}px + 8px);
+    }
+  }
+}
+
+@mixin height_100vh_minus($x) {
+  @media (min-width: "960px") {
+    .h100vh-#{$x} {
+      height: calc(100vh - #{$x}px);
+      
+    }
+  }
+  @media (max-width: "960px") {
+    .h100vh-#{$x} {
+      height: calc(100vh - #{$x}px + 8px);
+    }
+  }
+}
+
+@mixin title-divider($width) {
+  .title-divider-#{$width} {
+    width: 50px;
+    border: 2px solid #f44336 !important;
+    border-radius: 10px;
+    margin-top: 2px;
+  }
+}
+
+@include padded(25, 80);
+
+@include min_height_100vh_minus(64);
+@include height_100vh_minus(136);
+@include height_100vh_minus(200);
+
+@include padded_with_breakpoints(20, 200);
+@include padded_with_breakpoints(25, 80);
+@include padded_with_breakpoints(40, 185);
+@include padded_with_breakpoints(30, 300);
+@include padded_with_breakpoints(40, 400);
+@include padded_with_breakpoints(50, 200);
+@include padded_with_breakpoints(50, 300);
+@include padded_with_breakpoints(50, 400);
+@include padded_with_breakpoints(60, 200);
+@include padded_with_breakpoints(60, 300);
+@include padded_with_breakpoints(60, 400);
+
+
+$sizes: 5, 10, 15, 25;
+
+@each $size in $sizes {
+  @include title-divider($size);
+}
